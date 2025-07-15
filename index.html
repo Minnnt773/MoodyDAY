@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>Supabase Calendar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="authBox" class="auth-box">
+  <h3>เข้าสู่ระบบ / สมัครสมาชิก</h3>
+  <input type="email" id="email" placeholder="อีเมล" />
+  <input type="password" id="password" placeholder="รหัสผ่าน" />
+  <br>
+  <button onclick="login()">Login</button>
+  <button onclick="signup()">Sign‑up</button>
+</div>
+
+<div id="app" style="display:none;">
+  <button onclick="logout()">Logout</button>
+  <div class="calendar">
+    <h2 id="monthYear"></h2>
+    <div class="days" id="days"></div>
+  </div>
+</div>
+
+<div id="eventModal" class="modal">
+  <h4>เพิ่มกิจกรรม</h4>
+  <input id="eventInput" placeholder="กิจกรรม" />
+  <button onclick="addEvent()">บันทึก</button>
+  <button onclick="closeModal()">ยกเลิก</button>
+</div>
+
+<script type="module">
+  import { initSupabase, login, signup, logout, onAuthChange, renderCalendar, openModal, closeModal, addEvent, handleDrop } 
+    from './supabase.js';
+  import './calendar.js'; // side-effect ในการ bind ฟังก์ชัน
+  initSupabase();
+  onAuthChange(renderCalendar);
+</script>
+</body>
+</html>
