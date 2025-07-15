@@ -52,7 +52,7 @@
 let currentMonth = new Date().getMonth();
 
 async function renderCalendar() {
-  const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // 0=Sun
+  const firstDay = new Date(currentYear, currentMonth, 1).getDay(); 
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const daysContainer = document.getElementById("days");
   daysContainer.innerHTML = "";
@@ -78,7 +78,7 @@ async function renderCalendar() {
     if (events && events.length > 0) {
       events.forEach(ev => {
         const evEl = document.createElement("div");
-        evEl.textContent = `- ${ev.title}`;
+        evEl.textContent = `📌 ${ev.title}`;
         evEl.classList.add("event");
         dayDiv.appendChild(evEl);
       });
@@ -95,6 +95,7 @@ async function renderCalendar() {
     daysContainer.appendChild(empty);
   }
 }
+
 
 function openModal(date) {
   document.getElementById("eventModal").style.display = "block";
