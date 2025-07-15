@@ -87,34 +87,56 @@
     }
 
     async function renderCalendar() {
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = now.getMonth();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const daysContainer = document.getElementById("days");
-      daysContainer.innerHTML = "";
-      document.getElementById("monthYear").textContent = now.toLocaleString('th-TH', { month: 'long', year: 'numeric' });
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const firstDay = new Date(year, month, 1).getDay(); // 0=Sun,1=Mon,...
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysContainer = document.getElementById("days");
+  daysContainer.innerHTML = "";
+  document.getElementById("monthYear").textContent = now.toLocaleString('th-TH', { month: 'long', year: 'numeric' });
 
-      for (let i = 1; i <= daysInMonth; i++) {
-        const dateStr = `${year}-${(month+1).toString().padStart(2,'0')}-${i.toString().padStart(2,'0')}`;
-        const dayDiv = document.createElement("div");
-        dayDiv.classList.add("day");
-        dayDiv.textContent = i;
-        dayDiv.onclick = () => openModal(dateStr);
+  // เริ่มจากจันทร์=1 ในไทย (ปรับ Sunday=0 ให้เป็น 7)
+  let startDay = firstDay === 0 ? 7 : firstDay;
 
-        const { data: events } = await supabase.from('events').select('*').eq('date', dateStr);
-        if (events) {
-          events.forEach(ev => {
-            const evEl = document.createElement("div");
-            evEl.textContent = `- ${ev.title}`;
-            evEl.classList.add("event");
-            dayDiv.appendChild(evEl);
-          });
-        }
+  // เติมช่องว่างก่อนวันแรก
+  for (let i = 1; i < startDay; i++) {
+    const empty = document.createElement("div");
+    empty.classList.add("day", "empty");
+    daysContainer.appendChild(empty);
+  }
 
-        daysContainer.appendChild(dayDiv);
-      }
+  // เติมวันจริง
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dateStr = `${year}-${(month+1).toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`;
+    const dayDiv = document.createElement("div");
+    dayDiv.classList.add("day");
+    dayDiv.textContent = day;
+    dayDiv.onclick = () => openModal(dateStr);
+
+    const { data: events } = await supabase.from('events').select('*').eq('date', dateStr);
+    if (events && events.length > 0) {
+      events.forEach(ev => {
+        const evEl = document.createElement("div");
+        evEl.textContent = `- ${ev.title}`;
+        evEl.classList.add("event");
+        dayDiv.appendChild(evEl);
+      });
     }
+
+    daysContainer.appendChild(dayDiv);
+  }
+
+  // เติมช่องว่างหลังวันสุดท้าย เพื่อให้ครบสัปดาห์
+  let totalCells = startDay - 1 + daysInMonth;
+  let remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+  for (let i = 0; i < remaining; i++) {
+    const empty = document.createElement("div");
+    empty.classList.add("day", "empty");
+    daysContainer.appendChild(empty);
+  }
+}
+
 
     document.getElementById("loginBtn").addEventListener("click", login);
     document.getElementById("signupBtn").addEventListener("click", signup);
