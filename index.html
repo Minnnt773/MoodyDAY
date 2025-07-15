@@ -1,41 +1,133 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Supabase Calendar</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="authBox" class="auth-box">
-  <h3>เข้าสู่ระบบ / สมัครสมาชิก</h3>
-  <input type="email" id="email" placeholder="อีเมล" />
-  <input type="password" id="password" placeholder="รหัสผ่าน" />
-  <br>
-  <button onclick="login()">Login</button>
-  <button onclick="signup()">Sign‑up</button>
-</div>
-
-<div id="app" style="display:none;">
-  <button onclick="logout()">Logout</button>
-  <div class="calendar">
-    <h2 id="monthYear"></h2>
-    <div class="days" id="days"></div>
+  <div id="authBox" class="auth-box">
+    <h3>เข้าสู่ระบบ / สมัครสมาชิก</h3>
+    <input type="email" id="email" placeholder="อีเมล" />
+    <input type="password" id="password" placeholder="รหัสผ่าน" />
+    <br>
+    <button id="loginBtn">Login</button>
+    <button id="signupBtn">Sign‑up</button>
   </div>
-</div>
 
-<div id="eventModal" class="modal">
-  <h4>เพิ่มกิจกรรม</h4>
-  <input id="eventInput" placeholder="กิจกรรม" />
-  <button onclick="addEvent()">บันทึก</button>
-  <button onclick="closeModal()">ยกเลิก</button>
-</div>
+  <div id="app" style="display:none;">
+    <button id="logoutBtn">Logout</button>
+    <div class="calendar">
+      <h2 id="monthYear"></h2>
+      <div class="days" id="days"></div>
+    </div>
+  </div>
 
-<script type="module">
-  import { initSupabase, login, signup, logout, onAuthChange, renderCalendar, openModal, closeModal, addEvent, handleDrop } 
-    from './supabase.js';
-  import './calendar.js'; // side-effect ในการ bind ฟังก์ชัน
-  initSupabase();
-  onAuthChange(renderCalendar);
-</script>
+  <div id="eventModal" class="modal" style="display:none;">
+    <h4>เพิ่มกิจกรรม</h4>
+    <input id="eventInput" placeholder="กิจกรรม" />
+    <button id="addEventBtn">บันทึก</button>
+    <button id="cancelModalBtn">ยกเลิก</button>
+  </div>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabase = createClient(
+      'https://YOUR_PROJECT_ID.supabase.co',
+      'YOUR_SUPABASE_ANON_KEY'
+    );
+
+    const login = async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        alert("Login error: " + error.message);
+      } else {
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        renderCalendar();
+      }
+    };
+
+    const signup = async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const { error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        alert("Signup error: " + error.message);
+      } else {
+        alert("Signup success! You can login now.");
+      }
+    };
+
+    const logout = async () => {
+      await supabase.auth.signOut();
+      document.getElementById("authBox").style.display = "block";
+      document.getElementById("app").style.display = "none";
+    };
+
+    document.getElementById("loginBtn").addEventListener("click", login);
+    document.getElementById("signupBtn").addEventListener("click", signup);
+    document.getElementById("logoutBtn").addEventListener("click", logout);
+    document.getElementById("cancelModalBtn").addEventListener("click", closeModal);
+    document.getElementById("addEventBtn").addEventListener("click", addEvent);
+
+    function openModal(date) {
+      document.getElementById("eventModal").style.display = "block";
+      document.getElementById("eventInput").setAttribute("data-date", date);
+    }
+
+    function closeModal() {
+      document.getElementById("eventModal").style.display = "none";
+    }
+
+    async function addEvent() {
+      const title = document.getElementById("eventInput").value;
+      const date = document.getElementById("eventInput").getAttribute("data-date");
+      if (!title || !date) return;
+      await supabase.from('events').insert([{ title, date }]);
+      closeModal();
+      renderCalendar();
+    }
+
+    async function renderCalendar() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysContainer = document.getElementById("days");
+      daysContainer.innerHTML = "";
+      document.getElementById("monthYear").textContent = now.toLocaleString('th-TH', { month: 'long', year: 'numeric' });
+
+      for (let i = 1; i <= daysInMonth; i++) {
+        const dateStr = `${year}-${(month+1).toString().padStart(2,'0')}-${i.toString().padStart(2,'0')}`;
+        const dayDiv = document.createElement("div");
+        dayDiv.classList.add("day");
+        dayDiv.textContent = i;
+        dayDiv.onclick = () => openModal(dateStr);
+        
+        const { data: events } = await supabase.from('events').select('*').eq('date', dateStr);
+        events.forEach(ev => {
+          const evEl = document.createElement("div");
+          evEl.textContent = `- ${ev.title}`;
+          evEl.classList.add("event");
+          dayDiv.appendChild(evEl);
+        });
+
+        daysContainer.appendChild(dayDiv);
+      }
+    }
+
+    // Check if already logged in
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) {
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        renderCalendar();
+      }
+    });
+  </script>
 </body>
 </html>
