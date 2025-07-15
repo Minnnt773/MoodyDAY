@@ -1,2 +1,28 @@
-body { font-family: sans-serif; background:#f0f4f8; padding:20px; }
-/* ใส่ CSS ตามที่อยากได้ — สามารถใช้จากโค้ดก่อนหน้านี้ */
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day {
+  min-height: 80px;
+  background: #222;
+  color: #eee;
+  border-radius: 8px;
+  padding: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.day.empty {
+  background: transparent;
+  cursor: default;
+}
+
+.event {
+  font-size: 0.8em;
+  background: #555;
+  padding: 2px 4px;
+  border-radius: 4px;
+  margin-top: 2px;
+}
