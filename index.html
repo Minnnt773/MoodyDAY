@@ -74,8 +74,20 @@ async function renderCalendar() {
     dayDiv.textContent = day;
     dayDiv.onclick = () => openModal(dateStr);
 
-    const { data: events } = await supabase.from('events').select('*').eq('date', dateStr);
+    // debug
+    console.log("Query for date:", dateStr);
+
+    const { data: events, error } = await supabase
+      .from('events')
+      .select('*')
+      .eq('date', dateStr);
+
+    if (error) {
+      console.error("Supabase error:", error);
+    }
+
     if (events && events.length > 0) {
+      console.log("Found events on", dateStr, ":", events);
       events.forEach(ev => {
         const evEl = document.createElement("div");
         evEl.textContent = `📌 ${ev.title}`;
@@ -95,6 +107,7 @@ async function renderCalendar() {
     daysContainer.appendChild(empty);
   }
 }
+
 
 
 function openModal(date) {
