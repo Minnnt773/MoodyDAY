@@ -77,10 +77,11 @@ async function renderCalendar() {
     // debug
     console.log("Query for date:", dateStr);
 
-    const { data: events, error } = await supabase
+    const { data: events } = await supabase
       .from('events')
       .select('*')
       .eq('date', dateStr);
+
 
     if (error) {
       console.error("Supabase error:", error);
