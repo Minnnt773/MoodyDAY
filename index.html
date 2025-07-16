@@ -124,10 +124,21 @@ async function addEvent() {
   const title = document.getElementById("eventInput").value;
   const date = document.getElementById("eventInput").getAttribute("data-date");
   if (!title || !date) return;
-  await supabase.from('events').insert([{ title, date }]);
+
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    alert("ไม่พบ user กรุณา login ใหม่");
+    return;
+  }
+
+  await supabase.from('events').insert([
+    { user_id: user.id, title, date }
+  ]);
+
   closeModal();
   renderCalendar();
 }
+
 
 async function login() {
   const email = document.getElementById("email").value;
