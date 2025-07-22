@@ -1,206 +1,36 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Supabase Calendar</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodyDAY</title>
+    <link rel="stylesheet" href="style.css">
+    
+</style>
 </head>
 <body>
-  <div id="authBox" class="auth-box">
-    <h3>เข้าสู่ระบบ / สมัครสมาชิก</h3>
-    <input type="email" id="email" placeholder="อีเมล" />
-    <input type="password" id="password" placeholder="รหัสผ่าน" />
-    <br>
-    <button id="loginBtn">Login</button>
-    <button id="signupBtn">Sign‑up</button>
-  </div>
-
-  <div id="app" style="display:none;">
-    <button id="logoutBtn">Logout</button>
-    <div class="calendar">
-      <h2 id="monthYear"></h2>
-      <div class="days" id="days"></div>
+    <div class="container">
+        <div class="form-box active" id="login-form">
+            <form action="">
+                <h2>login</h2>
+                <input type="email" name="email" placeholder="email" required>
+                <input type="password" name="password" placeholder="password" required>
+                <button type="submit" name="login">login</button>
+                <p>Don't have an account?<a href="#" onclick = "showForm('Register-form')">Register</a></p>
+            </form>
+        </div>
+    
+        <div class="form-box" id="Register-form">
+            <form action="">
+                <h2>Register</h2>
+                <input type="text" name="name" placeholder="name" required>
+                <input type="email" name="email" placeholder="email" required>
+                <input type="password" name="password" placeholder="password" required>
+                <button type="submit" name="register">Register</button>
+                <p>Already have an account?<a href = "#" onclick = "showForm('login-form')" >Login</a></p>
+            </form>
+        </div>
     </div>
-  </div>
-
-  <div id="eventModal" class="modal" style="display:none;">
-    <h4>เพิ่มกิจกรรม</h4>
-    <input id="eventInput" placeholder="กิจกรรม" />
-    <button id="addEventBtn">บันทึก</button>
-    <button id="cancelModalBtn">ยกเลิก</button>
-  </div>
-
-  <div class="calendar">
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <button id="prevMonthBtn">&lt;</button>
-    <h2 id="monthYear"></h2>
-    <button id="nextMonthBtn">&gt;</button>
-  </div>
-  <div class="days" id="days"></div>
-</div>
-
-
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-    const supabase = createClient(
-      'https://cbzvgkpmlagvihiswtpr.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNienZna3BtbGFndmloaXN3dHByIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI1NzIxMDAsImV4cCI6MjA2ODE0ODEwMH0.zEWErfdsjpr5nNLzNiFJhU6M9ft59-VAxCafF9jU8j4'
-    );
-
-    let currentYear = new Date().getFullYear();
-let currentMonth = new Date().getMonth();
-
-async function renderCalendar() {
-  const firstDay = new Date(currentYear, currentMonth, 1).getDay(); 
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const daysContainer = document.getElementById("days");
-  daysContainer.innerHTML = "";
-  document.getElementById("monthYear").textContent = 
-    new Date(currentYear, currentMonth).toLocaleString('th-TH', { month: 'long', year: 'numeric' });
-
-  let startDay = firstDay === 0 ? 7 : firstDay;
-
-  for (let i = 1; i < startDay; i++) {
-    const empty = document.createElement("div");
-    empty.classList.add("day", "empty");
-    daysContainer.appendChild(empty);
-  }
-
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dateStr = `${currentYear}-${(currentMonth+1).toString().padStart(2,'0')}-${day.toString().padStart(2,'0')}`;
-    const dayDiv = document.createElement("div");
-    dayDiv.classList.add("day");
-    dayDiv.textContent = day;
-    dayDiv.onclick = () => openModal(dateStr);
-
-    // debug
-    console.log("Query for date:", dateStr);
-
-    const { data: events } = await supabase
-      .from('events')
-      .select('*')
-      .eq('date', dateStr);
-
-
-    if (error) {
-      console.error("Supabase error:", error);
-    }
-
-    if (events && events.length > 0) {
-      console.log("Found events on", dateStr, ":", events);
-      events.forEach(ev => {
-        const evEl = document.createElement("div");
-        evEl.textContent = `📌 ${ev.title}`;
-        evEl.classList.add("event");
-        dayDiv.appendChild(evEl);
-      });
-    }
-
-    daysContainer.appendChild(dayDiv);
-  }
-
-  let totalCells = startDay - 1 + daysInMonth;
-  let remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
-  for (let i = 0; i < remaining; i++) {
-    const empty = document.createElement("div");
-    empty.classList.add("day", "empty");
-    daysContainer.appendChild(empty);
-  }
-}
-
-
-
-function openModal(date) {
-  document.getElementById("eventModal").style.display = "block";
-  document.getElementById("eventInput").setAttribute("data-date", date);
-}
-
-function closeModal() {
-  document.getElementById("eventModal").style.display = "none";
-}
-
-async function addEvent() {
-  const title = document.getElementById("eventInput").value;
-  const date = document.getElementById("eventInput").getAttribute("data-date");
-  if (!title || !date) return;
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    alert("ไม่พบ user กรุณา login ใหม่");
-    return;
-  }
-
-  await supabase.from('events').insert([
-    { user_id: user.id, title, date }
-  ]);
-
-  closeModal();
-  renderCalendar();
-}
-
-
-async function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) {
-    alert("Login error: " + error.message);
-  } else {
-    document.getElementById("authBox").style.display = "none";
-    document.getElementById("app").style.display = "block";
-    renderCalendar();
-  }
-}
-
-async function signup() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const { error } = await supabase.auth.signUp({ email, password });
-  if (error) {
-    alert("Signup error: " + error.message);
-  } else {
-    alert("Signup success! You can login now.");
-  }
-}
-
-async function logout() {
-  await supabase.auth.signOut();
-  document.getElementById("authBox").style.display = "block";
-  document.getElementById("app").style.display = "none";
-}
-
-// เพิ่ม listener ปุ่มเลื่อนเดือน
-document.getElementById("prevMonthBtn").addEventListener("click", () => {
-  currentMonth--;
-  if (currentMonth < 0) {
-    currentMonth = 11;
-    currentYear--;
-  }
-  renderCalendar();
-});
-document.getElementById("nextMonthBtn").addEventListener("click", () => {
-  currentMonth++;
-  if (currentMonth > 11) {
-    currentMonth = 0;
-    currentYear++;
-  }
-  renderCalendar();
-});
-
-document.getElementById("loginBtn").addEventListener("click", login);
-document.getElementById("signupBtn").addEventListener("click", signup);
-document.getElementById("logoutBtn").addEventListener("click", logout);
-document.getElementById("cancelModalBtn").addEventListener("click", closeModal);
-document.getElementById("addEventBtn").addEventListener("click", addEvent);
-
-supabase.auth.getSession().then(async ({ data: { session } }) => {
-  if (session) {
-    document.getElementById("authBox").style.display = "none";
-    document.getElementById("app").style.display = "block";
-    renderCalendar();
-  }
-});
-</script>
+    <script src="scipt.js"></script>
+    <script src="supabase.js"></script>
 </body>
-</html>
