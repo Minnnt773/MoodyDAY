@@ -1,64 +1,76 @@
-body {
-  background: #fdf6e3; /* ครีม */
-  color: #333;
-  font-family: sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-.calendar {
-  max-width: 800px;
-  margin: 20px auto;
-  background: #fff8dc; /* ครีมอ่อน */
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+* {
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', serif;
+    
 }
-
-.days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  margin-top: 10px;
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    color: #333;
 }
-
-.day {
-  min-height: 80px;
-  background: #fffdf5;
-  border: 1px solid #e2d3b3;
-  border-radius: 8px;
-  padding: 5px;
-  cursor: pointer;
-  transition: background 0.2s;
+.container{
+    margin: 0 15px;
 }
-
-.day:hover {
-  background: #f9eecf;
+.form-box{
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
 }
-
-.day.empty {
-  background: transparent;
-  border: none;
-  cursor: default;
+.form-box.active{
+    display: block;
 }
-
-.event {
-  font-size: 0.85em;
-  background: #d8c28f;
-  color: #4b3600;
-  padding: 2px 4px;
-  border-radius: 4px;
-  margin-top: 3px;
-  display: block;
+h2{
+    font-size: 34px;
+    text-align: center;
+    margin-bottom: 20px;
 }
-
-button {
-  background: #d8c28f;
-  border: none;
-  color: #4b3600;
-  padding: 6px 10px;
-  border-radius: 6px;
-  cursor: pointer;
+input{
+    width: 100%;
+    padding: 12px;
+    background: #eee;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
 }
-
-button:hover {
-  background: #bba067;
+button{
+    width: 100%;
+    padding: 12px;
+    background: #7494ec;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 20px;
+    transition: 0.5;
+}
+button:hover{
+    background: #6884d3;
+}
+p{
+    font-size: 14.5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+p a{
+    color: #7494ec;
+    text-decoration: none;
+}
+p a:hover{
+    text-decoration: underline;
 }
