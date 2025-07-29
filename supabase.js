@@ -1,7 +1,7 @@
 import{ createClient } from'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 const supabaseUrl = 'https://cbzvgkpmlagvihiswtpr.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNienZna3BtbGFndmloaXN3dHByIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTI1NzIxMDAsImV4cCI6MjA2ODE0ODEwMH0.zEWErfdsjpr5nNLzNiFJhU6M9ft59-VAxCafF9jU8j4'
-const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase = createClient(supabaseUrl, supabaseKey)
 
 import { supabase } from './supabase.js'
 
@@ -30,7 +30,7 @@ document.querySelector('Register-form').addEventListener('submit', async (e) => 
 
 // ล็อกอิน
 document.querySelector('login-form').addEventListener('submit', async (e) => {
-    e.reventDefault();
+    e.preventDefault();
 
     const email = e.target.email.value
     const password = e.target.password.value
@@ -45,5 +45,15 @@ document.querySelector('login-form').addEventListener('submit', async (e) => {
     } else {
         alert('Login successful!')
         console.log('User info:', data.user)
+    }
+})
+
+console.log("Testing supabase connection...")
+
+supabase.auth.getSession().then(({data, error}) => {
+    if (error) {
+        console.error("supabase connection fail:",error.message)
+    }else{
+        console.log("connected to supabase",data)
     }
 })
