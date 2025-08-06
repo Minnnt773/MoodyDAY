@@ -41,6 +41,7 @@ document.querySelector('#login-form form').addEventListener('submit', async (e) 
         alert('Login failed: ' + error.message)
     } else {
         alert('Login successful!')
+        document.location(Calender/Calcender.html)
         console.log('User info:', data.user)
     }
 })
