@@ -15,7 +15,7 @@
                 <h2>login</h2>
                 <input type="email" name="email" placeholder="email" required>
                 <input type="password" name="password" placeholder="password" required>
-                <button type="submit" name="login" onclick="document.location='Calender/Calcender.html'">login</button>
+                <button type="submit" name="login" >login</button>
                 <p>Don't have an account?<a href="#" onclick = "showForm('Register-form')">Register</a></p>
             </form>
         </div>
@@ -26,11 +26,12 @@
                 <input type="text" name="name" placeholder="name" required>
                 <input type="email" name="email" placeholder="email" required>
                 <input type="password" name="password" placeholder="password" required>
-                <button type="submit" name="register" onclick="document.location='Calender/Calcender.html'">Register</button>
+                <button type="submit" name="register">Register</button>
                 <p>Already have an account?<a href = "#" onclick = "showForm('login-form')" >Login</a></p>
             </form>
         </div>
     </div>
+    <script scr = "switchform.js"></script>
     <script type="module" src="script.js"></script>
     <script type="module" src="supabase.js"></script>
 </body>
