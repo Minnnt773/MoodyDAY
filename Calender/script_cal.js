@@ -1,40 +1,59 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const calendarEl = document.getElementById('calendar');
+    const calendarEl = document.getElementById('calendar');
+    const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+    const eventTitleInput = document.getElementById('eventTitle');
+    const eventForm = document.getElementById('eventForm');
 
-  const calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'dayGridMonth',
-    locale: 'th', // ภาษาไทย
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,listWeek'
-    },
-    buttonText: {
-      today: 'วันนี้',
-      month: 'เดือน',
-      week: 'สัปดาห์',
-      list: 'รายการ'
-    },
-    events: [
-      {
-        title: 'นัดประชุม',
-        start: '2025-07-29T10:30:00',
-        end: '2025-07-29T12:30:00',
-        color: '#E67E22'
+    let calendar;
+    let tempEventInfo = {};
+
+    calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      selectable: true,
+      editable: true,
+      selectMirror: true,
+
+      select: function (info) {
+        tempEventInfo = info;
+        eventTitleInput.value = '';
+        document.getElementById('eventStart').value = info.startStr;
+        document.getElementById('eventEnd').value = info.endStr;
+        document.getElementById('eventAllDay').value = info.allDay;
+        modal.show();
       },
-      {
-        title: 'ส่งโปรเจค',
-        start: '2025-08-01',
-        color: '#2980B9'
+
+      eventClick: function (info) {
+        if (confirm('คุณต้องการลบกิจกรรมนี้ใช่หรือไม่?')) {
+          info.event.remove();
+        }
       },
-      {
-        title: 'ไปเที่ยว',
-        start: '2025-08-05',
-        end: '2025-08-07',
-        color: '#27AE60'
+
+      datesSet: function () {
+        const calendarContainer = document.querySelector('.fc-view-harness');
+        if (calendarContainer) {
+          calendarContainer.classList.remove('animate__animated', 'animate__fadeIn');
+          void calendarContainer.offsetWidth;
+          calendarContainer.classList.add('animate__animated', 'animate__fadeIn');
+        }
+      },
+
+      events: []
+    });
+
+    calendar.render();
+
+    eventForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const title = eventTitleInput.value.trim();
+      if (title) {
+        calendar.addEvent({
+          title: title,
+          start: document.getElementById('eventStart').value,
+          end: document.getElementById('eventEnd').value,
+          allDay: document.getElementById('eventAllDay').value === "true"
+        });
+      calendar.unselect();
       }
-    ]
+      modal.hide();
+    });
   });
-
-  calendar.render();
-});
