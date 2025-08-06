@@ -37,7 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       },
 
-      events: []
+      events: [{
+        title: 'ชอบหี อิอิ',
+        start: '2025-08-06',
+        end: '2025-08-06',
+        allDay: true
+      }]
     });
 
     calendar.render();
