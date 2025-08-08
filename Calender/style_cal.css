@@ -1,0 +1,71 @@
+/* ใช้ animate.css (โหลด CDN หรือเพิ่ม class ตามนี้) */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f4f4;
+}
+
+#calendar {
+  max-width: 1200px;
+  margin: 50px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  text-decoration: none !important;
+
+}
+
+#calendar a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+/* ปรับพื้นหลังของ card */
+.card {
+  border-radius: 1rem;
+  background: #ffffff;
+}
+
+/* ปรับขอบปฏิทิน */
+#calendar {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ปรับ style ของ event */
+.fc-event {
+  background-color: #0d6efd !important;
+  border: none !important;
+  color: white !important;
+  font-size: 0.9rem;
+  padding: 2px 4px;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.fc-event:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ปรับปุ่มวันวันนี้ */
+.fc .fc-button-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* เพิ่มเงาตอน hover ช่องวัน */
+.fc-daygrid-day:hover {
+  background-color: #f8f9fa;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.navbar-brand{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ac36fc !important;
+}
