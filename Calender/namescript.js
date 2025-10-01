@@ -13,7 +13,7 @@ async function loadUser() {
     }
 
     const user = data.user
-    const fullName = user.user_metadata?.display_name
+    const fullName = user.user_metadata.name || user.email
     nameEl.textContent = fullName
     logoutBtn.style.display = 'inline-block'
 
