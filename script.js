@@ -22,6 +22,7 @@ document.querySelector('#Register-form form').addEventListener('submit', async (
         alert('Register failed: ' + error.message)
     } else {
         alert('Register successful! Please check your email to confirm.')
+        document.location = 'index.html'
     }
 })
 
