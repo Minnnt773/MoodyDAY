@@ -74,3 +74,8 @@ p a{
 p a:hover{
     text-decoration: underline;
 }
+img{
+display: block;
+  margin: auto;
+  width: 50%;
+}
