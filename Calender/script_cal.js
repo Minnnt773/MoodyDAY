@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const modal = new bootstrap.Modal(document.getElementById('eventModal'));
   const eventTitleInput = document.getElementById('eventTitle');
   const eventForm = document.getElementById('eventForm');
-  let calendar; 
+  let calendar;
 
   let tempEventInfo = {};
 
@@ -56,7 +56,30 @@ document.addEventListener('DOMContentLoaded', function () {
           alert('เกิดข้อผิดพลาดในการลบกิจกรรม');
         }
       }
+
     },
+    // touch phone
+    eventClick: function (info) {
+      // ใช้ jQuery เปลี่ยนข้อความใน div
+      $("#eventDetail").text("คุณเลือกกิจกรรม: " + info.event.title);
+
+      // ใช้ jQuery เปิด modal ของ Bootstrap
+      $("#eventModal").modal("show");
+
+      // ใช้ jQuery เก็บค่า id ไว้ใน hidden input
+      $("#eventId").val(info.event.id);
+    }
+    ,
+    eventClick: function (info) {
+      $("#eventId").val(info.event.id);
+      $("#eventTitle").text(info.event.title);
+      $("#deleteBtn").off("click").on("click", function () {
+        info.event.remove();
+        $("#eventModal").modal("hide");
+      });
+      $("#eventModal").modal("show");
+    }
+    ,
 
     datesSet: function () {
       const calendarContainer = document.querySelector('.fc-view-harness');
@@ -110,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const { data: [newEvent], error } = await supabase
       .from('events')
       .insert({
-        title:title,
+        title: title,
         start_date: start,
         end_date: end,
         all_day: allDay,
@@ -128,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   isSubmitting = false;
 });
-
 
 
 
