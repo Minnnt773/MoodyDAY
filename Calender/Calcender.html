@@ -9,13 +9,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!-- Bootstrap -->
   <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- phone touuch -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
   <script src="jquery.ui.touch.js"></script>
-  
+
   <link rel="stylesheet" href="style_cal.css">
-  
+
   <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <script src="https://kit.fontawesome.com/0d5fe42601.js" crossorigin="anonymous"></script>
 
@@ -25,34 +26,41 @@
 
 <body class="bg-light">
   <!-- Tap bar -->
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/Calender/Calcender.html"><img src="/imag/crystal-ball.png" alt="Ball" width="50"
-          height="50"> MoodyDay</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+    <div class="container-fluid px-3 px-lg-5">
+      <a class="navbar-brand d-flex align-items-center text-white" href="/Calender/Calcender.html"><img
+          src="/imag/crystal-ball.png" alt="Ball" width="50" height="50"> MoodyDay</a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-house-chimney"></i> Home</a>
+            <a class="nav-link active text-white fw-medium px-3 py-2" aria-current="page" href="#"><i
+                class="fa-solid fa-house-chimney"></i> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa-solid fa-link"></i> Link</a>
+            <a class="nav-link text-white fw-medium px-3 py-2" href="#"><i class="fa-solid fa-link"></i> Link</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Tool
+            <a class="nav-link dropdown-toggle text-white fw-medium px-3 py-2" href="#" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-tools me-2"></i>Tool
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/Calender/Calcender.html">Calendar</a></li>
-              <li><a class="dropdown-item" href="/Tool/WeddingCheck.html">ตรวจเช็ควันแต่งงาน</a></li>
-              <li><a class="dropdown-item" href="/Tool/comment/commentpag.html">Comment for us</a></li>
+              <li><a class="dropdown-item py-2" href="/Calender/Calcender.html"><i
+                    class="fa-solid fa-calendar me-2 text-primary"></i>Calendar</a></li>
+              <li><a class="dropdown-item py-2" href="/Tool/WeddingCheck.html"><i
+                    class="fa-solid fa-heart me-2 text-danger"></i>ตรวจเช็ควันแต่งงาน</a></li>
+              <li><a class="dropdown-item py-2" href="/Tool/comment/commentpag.html"><i
+                    class="fa-solid fa-comment me-2 text-success"></i>Comment for us</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item py-2" href="#"><i class="fa-solid fa-plus me-2 text-info"></i>Something else
+                  here</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -62,16 +70,22 @@
 
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-user"></i><span id="display-name">Guest</span>
+            <a class="nav-link dropdown-toggle text-white fw-medium px-3 py-2 d-flex align-items-center" href="#"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="user-avatar">
+                <i class="fa-solid fa-user"></i>
+              </span>
+              <span id="display-name">
+                Guest
+              </span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item py-2" href="#">Profile</a></li>
+              <li><a class="dropdown-item py-2" href="#">Settings</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a id="btn-logout" class="dropdown-item" href="/index.html">Logout</a></li>
+              <li><a id="btn-logout" class="dropdown-item py-2" href="/index.html"><i class="fa-solid fa-sign-out-alt me-2 text-danger"></i>Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -82,26 +96,26 @@
 
   <div class="container my-5">
     <div class="card shadow-lg animate__animated animate__fadeIn">
-      <div class="card-body">
-        <h2 class="text-center mb-4 text-primary">My Schedule</h2>
-        <div id="calendar"></div>
+      <div class="card-body p-4 p-md-5">
+        <h2 class="text-center mb-4 fw-bold" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">My Schedule</h2>
+        <div id="calendar" class="p-3"></div>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap Modal -->
   <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="eventModalLabel">ADD Event</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="eventModalLabel"><i class="fa-solid fa-plus-circle me-2"></i>ADD Event</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body p-4">
           <form id="eventForm">
-            <div class="mb-3">
-              <label for="eventTitle" class="form-label">Event Name</label>
-              <input type="text" class="form-control" id="eventTitle" required />
+            <div class="mb-4">
+              <label for="eventTitle" class="form-label fw-medium"><i class="fa-solid fa-tag me-2 text-primary"></i>Event Name</label>
+              <input type="text" class="form-control p-3" id="eventTitle" required />
             </div>
             <input type="hidden" id="eventStart">
             <input type="hidden" id="eventEnd">
@@ -128,9 +142,7 @@
   <!-- NAME USER FUNCTION -->
   <script type="module" src="/Calender/namescript.js"></script>
 
-  <script>
-    $('eventModal').addTouch();
-  </script>
+  <script type="modal" src="/mobilepatform.js"></script>
 </body>
 
 </html>
