@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     },
     // touch phone
-    eventClick: function (info) {
+    select: function (info) {
       // ใช้ jQuery เปลี่ยนข้อความใน div
-      $("#eventDetail").text("คุณเลือกกิจกรรม: " + info.event.title);
+      $("#calendar").text("คุณเลือกกิจกรรม: " + info.event.title);
 
       // ใช้ jQuery เปิด modal ของ Bootstrap
       $("#eventModal").modal("show");
