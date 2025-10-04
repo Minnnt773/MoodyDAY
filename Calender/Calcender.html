@@ -3,10 +3,15 @@
 
 <head>
   <meta charset='utf-8' />
-  <!-- phone touuch -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-  <script src="jquery.ui.touch.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- jQuery UI -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+  <!-- jQuery UI Touch Punch -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <!-- Fullcalender -->
   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js'></script>
   <!-- animation -->
@@ -85,7 +90,8 @@
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a id="btn-logout" class="dropdown-item py-2" href="/index.html"><i class="fa-solid fa-sign-out-alt me-2 text-danger"></i>Logout</a></li>
+              <li><a id="btn-logout" class="dropdown-item py-2" href="/index.html"><i
+                    class="fa-solid fa-sign-out-alt me-2 text-danger"></i>Logout</a></li>
             </ul>
           </li>
         </ul>
@@ -97,7 +103,9 @@
   <div class="container my-5">
     <div class="card shadow-lg animate__animated animate__fadeIn">
       <div class="card-body p-4 p-md-5">
-        <h2 class="text-center mb-4 fw-bold" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">My Schedule</h2>
+        <h2 class="text-center mb-4 fw-bold"
+          style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          My Schedule</h2>
         <div id="calendar" class="p-3"></div>
       </div>
     </div>
@@ -108,13 +116,15 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header border-0">
-          <h5 class="modal-title fw-bold" id="eventModalLabel"><i class="fa-solid fa-plus-circle me-2"></i>ADD Event</h5>
+          <h5 class="modal-title fw-bold" id="eventModalLabel"><i class="fa-solid fa-plus-circle me-2"></i>ADD Event
+          </h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-4">
           <form id="eventForm">
             <div class="mb-4">
-              <label for="eventTitle" class="form-label fw-medium"><i class="fa-solid fa-tag me-2 text-primary"></i>Event Name</label>
+              <label for="eventTitle" class="form-label fw-medium"><i
+                  class="fa-solid fa-tag me-2 text-primary"></i>Event Name</label>
               <input type="text" class="form-control p-3" id="eventTitle" required />
             </div>
             <input type="hidden" id="eventStart">
