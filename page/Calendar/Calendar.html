@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoodyDay - Beautiful Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
+    <link rel="stylesheet" href="/Stye/Calendar/style_calen.css">
+    
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+        <div class="container-fluid px-3 px-lg-5">
+            <a class="navbar-brand d-flex align-items-center text-white" href="/page/Calendar/Calendar.html">
+                <span class="brand-icon">
+                    <img src="/imag/crystal-ball.png" alt="Ball" width="34" height="34" style="border-radius: 50%;"
+                        onerror="this.src=''; this.alt='🔮'; this.style.display='none'; this.parentNode.innerHTML='🔮';">
+                </span>
+                <span>MoodyDay</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white fw-medium px-3 py-2" aria-current="page" href="#">
+                            <i class="fa-solid fa-house-chimney me-2"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fw-medium px-3 py-2" href="#">
+                            <i class="fa-solid fa-link me-2"></i>
+                            <span>Link</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-medium px-3 py-2" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-tools me-2"></i>
+                            <span>Tool</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item py-2" href="/page/Calendar/Calendar.html">
+                                    <i class="fa-solid fa-calendar me-2 text-primary"></i>Calendar</a></li>
+                            <li><a class="dropdown-item py-2" href="/page/Weding/weding.html">
+                                    <i class="fa-solid fa-heart me-2 text-danger"></i>ตรวจเช็ควันแต่งงาน</a></li>
+                            <li><a class="dropdown-item py-2" href="/page/Comment/comments.html">
+                                    <i class="fa-solid fa-comment me-2 text-success"></i>Comment for us</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item py-2" href="#">
+                                    <i class="fa-solid fa-plus me-2 text-info"></i>Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50 fw-medium px-3 py-2" aria-disabled="true">
+                            <i class="fa-solid fa-ban me-2"></i>
+                            <span>Disabled</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-medium px-3 py-2 d-flex align-items-center"
+                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="user-avatar">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <span id="display-name">Guest</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item py-2" href="#">
+                                    <i class="fa-solid fa-user-circle me-2 text-primary"></i>Profile</a></li>
+                            <li><a class="dropdown-item py-2" href="#">
+                                    <i class="fa-solid fa-cog me-2 text-secondary"></i>Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a id="btn-logout" class="dropdown-item py-2" href="/page/login&regis/Login.html">
+                                    <i class="fa-solid fa-sign-out-alt me-2 text-danger"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bootstrap Modal -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="card shadow-lg border-0 animate__animated animate__fadeInUp"
+                    style="border-radius: 20px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);">
+                    <div class="card-header text-center py-4"
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px 20px 0 0; border: none;">
+                        <h2 class="text-white fw-bold mb-0">
+                            <i class="fa-solid fa-calendar-days me-3"></i>My Beautiful Calendar
+                        </h2>
+                        <p class="text-white-50 mb-0 mt-2">จัดการตารางงานของคุณอย่างสวยงาม</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="eventModalLabel"><i class="fa-solid fa-plus-circle me-2"></i>ADD Event
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="eventForm">
+            <div class="mb-4">
+              <label for="eventTitle" class="form-label fw-medium"><i
+                  class="fa-solid fa-tag me-2 text-primary"></i>Event Name</label>
+              <input type="text" class="form-control p-3" id="eventTitle" required />
+            </div>
+            <input type="hidden" id="eventStart">
+            <input type="hidden" id="eventEnd">
+            <input type="hidden" id="eventAllDay">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+    <div class="modal fade delete-modal" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-danger text-white border-0">
+                    <h5 class="modal-title fw-bold" id="deleteModalLabel">
+                        <i class="fa-solid fa-exclamation-triangle me-2"></i>ยืนยันการลบ
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <div class="mb-3">
+                        <i class="fa-solid fa-trash-can text-danger delete-icon" style="font-size: 3rem;"></i>
+                    </div>
+                    <h6 class="fw-bold mb-3">คุณแน่ใจหรือไม่ที่จะลบกิจกรรมนี้?</h6>
+                    <div class="alert alert-warning border-0 rounded-3">
+                        <p class="text-muted mb-1">กิจกรรม: <span class="fw-bold text-dark" id="deleteEventName"></span></p>
+                        <p class="text-muted small mb-0">
+                            <i class="fa-solid fa-info-circle me-1"></i>
+                            การดำเนินการนี้ไม่สามารถยกเลิกได้
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">
+                        <i class="fa-solid fa-times me-2"></i>ยกเลิก
+                    </button>
+                    <button type="button" class="btn btn-danger px-4" id="confirmDeleteBtn">
+                        <i class="fa-solid fa-trash me-2"></i>ลบกิจกรรม
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Name Load -->
+    <script type="module" src="/function/user/name.js"></script>
+    <!-- Nave function -->
+    <script type="module" src="/function/์Navbar/navbar.js"></script>
+    <!-- Show calendar -->
+    <script type="module" src="/function/Calendar/calendar/show_calen.js"></script>
+</body>
+
+</html>

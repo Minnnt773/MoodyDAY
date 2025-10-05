@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scal=1.0">
+    <title>Comments</title>
+    <link rel="icon" type="image/x-icon" href="/imag/crystal-ball.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Stye/comments/com.css">
+    <script src="https://kit.fontawesome.com/0d5fe42601.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+        <div class="container-fluid px-3 px-lg-5">
+            <a class="navbar-brand d-flex align-items-center text-white" href="/page/Calendar/Calendar.html">
+                <span class="brand-icon">
+                    <img src="/imag/crystal-ball.png" alt="Ball" width="34" height="34" style="border-radius: 50%;"
+                        onerror="this.src=''; this.alt='🔮'; this.style.display='none'; this.parentNode.innerHTML='🔮';">
+                </span>
+                <span>MoodyDay</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white fw-medium px-3 py-2" aria-current="page" href="#">
+                            <i class="fa-solid fa-house-chimney me-2"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fw-medium px-3 py-2" href="#">
+                            <i class="fa-solid fa-link me-2"></i>
+                            <span>Link</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-medium px-3 py-2" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-tools me-2"></i>
+                            <span>Tool</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item py-2" href="/page/Calendar/Calendar.html">
+                                    <i class="fa-solid fa-calendar me-2 text-primary"></i>Calendar</a></li>
+                            <li><a class="dropdown-item py-2" href="/page/Weding/weding.html">
+                                    <i class="fa-solid fa-heart me-2 text-danger"></i>ตรวจเช็ควันแต่งงาน</a></li>
+                            <li><a class="dropdown-item py-2" href="/page/Comment/comments.html">
+                                    <i class="fa-solid fa-comment me-2 text-success"></i>Comment for us</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item py-2" href="#">
+                                    <i class="fa-solid fa-plus me-2 text-info"></i>Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50 fw-medium px-3 py-2" aria-disabled="true">
+                            <i class="fa-solid fa-ban me-2"></i>
+                            <span>Disabled</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-medium px-3 py-2 d-flex align-items-center"
+                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="user-avatar">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <span id="display-name">Guest</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item py-2" href="#">
+                                    <i class="fa-solid fa-user-circle me-2 text-primary"></i>Profile</a></li>
+                            <li><a class="dropdown-item py-2" href="#">
+                                    <i class="fa-solid fa-cog me-2 text-secondary"></i>Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a id="btn-logout" class="dropdown-item py-2" href="/page/login&regis/Login.html">
+                                    <i class="fa-solid fa-sign-out-alt me-2 text-danger"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold text-dark mb-3">
+                <i class="bi bi-chat-dots-fill text-primary"></i>
+                ความคิดเห็นเกี่ยวกับเว็บไซต์
+            </h1>
+            <p class="lead text-muted">แบ่งปันประสบการณ์และความคิดเห็นของคุณ</p>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="bi bi-pencil-square"></i> เขียนความคิดเห็น
+                </h3>
+            </div>
+            <div class="card-body">
+                <form id="commentForm">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="userName" class="form-label fw-semibold">ชื่อ</label>
+                            <input type="text" class="form-control" id="userName" required placeholder="กรอกชื่อของคุณ">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="userEmail" class="form-label fw-semibold">อีเมล</label>
+                            <input type="email" class="form-control" id="userEmail" required
+                                placeholder="example@email.com">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">ให้คะแนน</label>
+                        <div id="starRating" class="d-flex gap-1">
+                            <span class="star text-muted" data-rating="1">⭐</span>
+                            <span class="star text-muted" data-rating="2">⭐</span>
+                            <span class="star text-muted" data-rating="3">⭐</span>
+                            <span class="star text-muted" data-rating="4">⭐</span>
+                            <span class="star text-muted" data-rating="5">⭐</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="commentText" class="form-label fw-semibold">ความคิดเห็น</label>
+                        <textarea class="form-control" id="commentText" rows="4" required
+                            placeholder="แบ่งปันความคิดเห็นของคุณเกี่ยวกับเว็บไซต์..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        <i class="bi bi-send-fill"></i> ส่งความคิดเห็น
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Comments Display -->
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h3 class="card-title mb-0">
+                    <i class="bi bi-chat-left-text-fill"></i> ความคิดเห็นล่าสุด
+                </h3>
+            </div>
+            <div class="card-body">
+                <div id="commentsContainer"></div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card stats-card text-center h-100">
+                    <div class="card-body">
+                        <i class="bi bi-chat-square-text-fill text-primary display-4 mb-3"></i>
+                        <h2 class="display-5 fw-bold text-primary" id="totalComments">0</h2>
+                        <p class="text-muted mb-0">ความคิดเห็นทั้งหมด</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card stats-card text-center h-100">
+                    <div class="card-body">
+                        <i class="bi bi-star-fill text-warning display-4 mb-3"></i>
+                        <h2 class="display-5 fw-bold text-warning" id="averageRating">0.0</h2>
+                        <p class="text-muted mb-0">คะแนนเฉลี่ย</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card stats-card text-center h-100">
+                    <div class="card-body">
+                        <i class="bi bi-hand-thumbs-up-fill text-success display-4 mb-3"></i>
+                        <h2 class="display-5 fw-bold text-success" id="positivePercent">0%</h2>
+                        <p class="text-muted mb-0">ความคิดเห็นเชิงบวก</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="successToast" class="toast" role="alert">
+            <div class="toast-header bg-success text-white">
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <strong class="me-auto">สำเร็จ!</strong>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                ส่งความคิดเห็นเรียบร้อยแล้ว!
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Name Load -->
+    <script type="module" src="/function/user/name.js"></script>
+    <!-- Nave function -->
+    <script type="module" src="/function/์Navbar/navbar.js"></script>
+    <!-- Show com function -->
+    <script type="module" src="/function/Comment/show_com.js"></script>
+
+
+</body>
+
+</html>

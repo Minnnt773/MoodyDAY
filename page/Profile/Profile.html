@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เลือก Avatar - MoodyDay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="/Stye/Profile/stylePro.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom ">
+        <div class="container-fluid px-3 px-lg-5">
+            <a class="navbar-brand d-flex align-items-center text-white" href="/page/Calendar/Calendar.html">
+                <span class="brand-icon">
+                    <img src="/imag/crystal-ball.png" alt="Ball" width="34" height="34" style="border-radius: 50%;"
+                        onerror="this.src=''; this.alt='🔮'; this.style.display='none'; this.parentNode.innerHTML='🔮';">
+                </span>
+                <span>MoodyDay</span>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white fw-medium px-3 py-2" aria-current="page"
+                            href="/page/Calendar/Calendar.html">
+                            <i class="fa-solid fa-house-chimney me-2"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white fw-medium px-3 py-2" href="#">
+                            <i class="fa-solid fa-link me-2"></i>
+                            <span>Link</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-medium px-3 py-2" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-tools me-2"></i>
+                            <span>Tool</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item py-2" href="/page/Calendar/Calendar.html">
+                                    <i class="fa-solid fa-calendar me-2 text-primary"></i>Calendar</a></li>
+                            <li><a class="dropdown-item py-2" href="/page/Weding/weding.html">
+                                    <i class="fa-solid fa-heart me-2 text-danger"></i>ตรวจเช็ควันแต่งงาน</a></li>
+                            <li><a class="dropdown-item py-2" href="/page/Comment/comments.html">
+                                    <i class="fa-solid fa-comment me-2 text-success"></i>Comment for us</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item py-2" href="#">
+                                    <i class="fa-solid fa-plus me-2 text-info"></i>Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50 fw-medium px-3 py-2" aria-disabled="true">
+                            <i class="fa-solid fa-ban me-2"></i>
+                            <span>Disabled</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-medium px-3 py-2 d-flex align-items-center"
+                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="user-avatar me-2">
+                                <span id="user-color" class="rounded-circle d-inline-block"
+                                    style="width:24px;height:24px;background:gray;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;">
+                                </span>
+                                <span id="display-name">Guest</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item py-2" href="#">
+                                    <i class="fa-solid fa-user-circle me-2 text-primary"></i>Profile</a></li>
+                            <li><a class="dropdown-item py-2" href="/page/Profile/Profile.html">
+                                    <i class="fa-solid fa-cog me-2 text-secondary"></i>Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a id="btn-logout" class="dropdown-item py-2" href="/page/login&regis/Login.html">
+                                    <i class="fa-solid fa-sign-out-alt me-2 text-danger"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container avatar-container">
+        <div class="card avatar-card shadow-lg border-0 animate__animated animate__fadeInUp">
+            <!-- Header -->
+            <div class="avatar-header">
+                <h1 class="avatar-title mb-2">
+                    <i class="fa-solid fa-user-circle me-3"></i>เลือก Avatar
+                </h1>
+                <p class="avatar-subtitle mb-0">ปรับแต่งโปรไฟล์ส่วนตัวของคุณ</p>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Current Profile Section -->
+                <div class="profile-section">
+                    <div class="section-title">
+                        <i class="fa-solid fa-user text-primary"></i>
+                        โปรไฟล์ปัจจุบัน
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-4 text-center">
+                            <div class="current-avatar" id="currentAvatar">
+                                👤
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="fw-bold mb-2" id="currentName">Guest User</h4>
+                            <p class="text-muted mb-0">สมาชิกตั้งแต่ วันนี้</p>
+                            <div class="mt-2">
+                                <span class="badge bg-primary">ผู้ใช้ใหม่</span>
+                                <span class="badge bg-success">ออนไลน์</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avatar Categories -->
+                <div class="avatar-categories">
+                    <div class="section-title">
+                        <i class="fa-solid fa-grid-2 text-info"></i>
+                        หมวดหมู่ Avatar
+                    </div>
+                    <div class="text-center">
+                        <button class="btn category-btn active" data-category="people">👥 คน</button>
+                        <button class="btn category-btn" data-category="animals">🐾 สัตว์</button>
+                        <button class="btn category-btn" data-category="objects">🎯 วัตถุ</button>
+                        <button class="btn category-btn" data-category="nature">🌿 ธรรมชาติ</button>
+                    </div>
+                </div>
+
+                <!-- Avatar Selection -->
+                <div class="mb-4">
+                    <div class="section-title">
+                        <i class="fa-solid fa-images text-warning"></i>
+                        เลือก Avatar
+                    </div>
+                    <div class="avatar-grid" id="avatarGrid">
+                        <!-- People Category -->
+                        <div class="avatar-option" data-avatar="👤" data-category="people">👤</div>
+                        <div class="avatar-option" data-avatar="👨" data-category="people">👨</div>
+                        <div class="avatar-option" data-avatar="👩" data-category="people">👩</div>
+                        <div class="avatar-option" data-avatar="🧑" data-category="people">🧑</div>
+                        <div class="avatar-option" data-avatar="👨‍💼" data-category="people">👨‍💼</div>
+                        <div class="avatar-option" data-avatar="👩‍💼" data-category="people">👩‍💼</div>
+                        <div class="avatar-option" data-avatar="👨‍🎓" data-category="people">👨‍🎓</div>
+                        <div class="avatar-option" data-avatar="👩‍🎓" data-category="people">👩‍🎓</div>
+                        <div class="avatar-option" data-avatar="👨‍💻" data-category="people">👨‍💻</div>
+                        <div class="avatar-option" data-avatar="👩‍💻" data-category="people">👩‍💻</div>
+
+                        <!-- Animals Category -->
+                        <div class="avatar-option" data-avatar="🐱" data-category="animals" style="display: none;">🐱
+                        </div>
+                        <div class="avatar-option" data-avatar="🐶" data-category="animals" style="display: none;">🐶
+                        </div>
+                        <div class="avatar-option" data-avatar="🐰" data-category="animals" style="display: none;">🐰
+                        </div>
+                        <div class="avatar-option" data-avatar="🦊" data-category="animals" style="display: none;">🦊
+                        </div>
+                        <div class="avatar-option" data-avatar="🐻" data-category="animals" style="display: none;">🐻
+                        </div>
+                        <div class="avatar-option" data-avatar="🐼" data-category="animals" style="display: none;">🐼
+                        </div>
+                        <div class="avatar-option" data-avatar="🐨" data-category="animals" style="display: none;">🐨
+                        </div>
+                        <div class="avatar-option" data-avatar="🦁" data-category="animals" style="display: none;">🦁
+                        </div>
+
+                        <!-- Objects Category -->
+                        <div class="avatar-option" data-avatar="⚽" data-category="objects" style="display: none;">⚽
+                        </div>
+                        <div class="avatar-option" data-avatar="🎮" data-category="objects" style="display: none;">🎮
+                        </div>
+                        <div class="avatar-option" data-avatar="🎸" data-category="objects" style="display: none;">🎸
+                        </div>
+                        <div class="avatar-option" data-avatar="📚" data-category="objects" style="display: none;">📚
+                        </div>
+                        <div class="avatar-option" data-avatar="💎" data-category="objects" style="display: none;">💎
+                        </div>
+                        <div class="avatar-option" data-avatar="🎯" data-category="objects" style="display: none;">🎯
+                        </div>
+                        <div class="avatar-option" data-avatar="🚀" data-category="objects" style="display: none;">🚀
+                        </div>
+                        <div class="avatar-option" data-avatar="⭐" data-category="objects" style="display: none;">⭐
+                        </div>
+
+                        <!-- Nature Category -->
+                        <div class="avatar-option" data-avatar="🌸" data-category="nature" style="display: none;">🌸
+                        </div>
+                        <div class="avatar-option" data-avatar="🌺" data-category="nature" style="display: none;">🌺
+                        </div>
+                        <div class="avatar-option" data-avatar="🌻" data-category="nature" style="display: none;">🌻
+                        </div>
+                        <div class="avatar-option" data-avatar="🌿" data-category="nature" style="display: none;">🌿
+                        </div>
+                        <div class="avatar-option" data-avatar="🍀" data-category="nature" style="display: none;">🍀
+                        </div>
+                        <div class="avatar-option" data-avatar="🌙" data-category="nature" style="display: none;">🌙
+                        </div>
+                        <div class="avatar-option" data-avatar="☀️" data-category="nature" style="display: none;">☀️
+                        </div>
+                        <div class="avatar-option" data-avatar="🌈" data-category="nature" style="display: none;">🌈
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Profile Section -->
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fa-solid fa-edit text-success"></i>
+                        แก้ไขข้อมูลส่วนตัว
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="userName" class="form-label fw-medium">
+                                <i class="fa-solid fa-signature me-2"></i>ชื่อผู้ใช้
+                            </label>
+                            <input type="text" id="userName" class="form-control form-control-custom"
+                                placeholder="กรอกชื่อผู้ใช้" value="Guest User">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="userEmail" class="form-label fw-medium">
+                                <i class="fa-solid fa-envelope me-2"></i>อีเมล
+                            </label>
+                            <input type="email" id="userEmail" class="form-control form-control-custom"
+                                placeholder="กรอกอีเมล" value="guest@example.com">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Color Section -->
+                <div class="edit-section">
+                    <div class="section-title">
+                        <i class="fa-solid fa-palette text-danger"></i>
+                        เลือกสีธีม
+                    </div>
+                    <div class="color-picker">
+                        <div class="color-option selected"
+                            data-color="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
+                            style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
+                            style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+                            style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+                            style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)"
+                            style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)"
+                            style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);"></div>
+                        <div class="color-option" data-color="linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)"
+                            style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <div class="section-title justify-content-center">
+                        <i class="fa-solid fa-eye text-info"></i>
+                        ตัวอย่าง
+                    </div>
+                    <div class="preview-avatar" id="previewAvatar"
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        👤
+                    </div>
+                    <h5 class="fw-bold mb-1" id="previewName">Guest User</h5>
+                    <p class="text-muted small mb-0" id="previewEmail">guest@example.com</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="row g-3 mt-4">
+                    <div class="col-md-8">
+                        <button type="button" class="btn save-btn" id="saveBtn">
+                            <i class="fa-solid fa-save me-2"></i>บันทึกการตั้งค่า
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn cancel-btn" id="cancelBtn">
+                            <i class="fa-solid fa-times me-2"></i>ยกเลิก
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/function/Profile/Profile.js"></script>
+    <script type="module" src="/function/Profile/add_pro.js"></script>
+
+    <script type="module" src="/function/์Navbar/navbar.js"></script>
+    <script type="module" src="/function/user/name.js"></script>
+    <script type="module" src="/function/user/show_profile.js"></script>
+
+</body>
+
+</html>
